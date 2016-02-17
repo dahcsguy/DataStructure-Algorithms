@@ -1,7 +1,20 @@
+import java.util.Stack;
 public class BST <T extends Comparable<T>>{
 	public static Node root;
 	public BST(){
 		this.root = null;	
+	}
+	public static void main(String []args){
+		BST b = new BST();
+		b.massInsert(new Integer[]{1,3,34,45,2,3,5,2,2,545,4});
+		b.toPre();
+		b.toPre2();
+		System.out.println();
+		b.toPost2();
+		b.toPost();
+		System.out.println();
+		b.toIn();
+		b.toIn2();
 	}
 	
 	public boolean find(Comparable n){
@@ -53,6 +66,33 @@ public class BST <T extends Comparable<T>>{
 		System.out.print(root.data+" ");
 		toIn(root.right);
 	}
+	public void toIn2(){
+		toIn2(root);
+		System.out.println();
+	}
+	private static void toIn2(Node root){
+		Node current = root;
+		if(root == null)
+			return;
+		Stack s = new Stack();
+		
+		while(current != null){
+			s.push(current);
+			current = current.left;
+		}
+		while(!s.empty()){
+			current = (Node)s.pop();
+			System.out.print(current.data+ " ");
+			if(current.right != null){
+				current = current.right;
+				while(current != null){
+					s.push(current);
+					current = current.left;
+				}
+			}
+		}
+	}
+	
 	public void toPre(){
 		toPre(root);
 		System.out.print("\n");
@@ -65,10 +105,36 @@ public class BST <T extends Comparable<T>>{
 		toPre(root.left);
 		toPre(root.right);
 	}
+	public void toPre2(){
+		toPre2(root);
+		System.out.println();
+	}
+	private static void toPre2(Node root){
+		Node current = root;
+		if(root == null)
+			return;
+		Stack s = new Stack();
+		s.push(current);
+		while(!s.empty()){
+			current = (Node)s.pop();
+			System.out.print(current.data+" ");
+			if(current.right!=null)
+				s.push(current.right);
+			if(current.left!=null)
+				s.push(current.left);
+		}
+	}
+	
+	
+	
+	
 	public void toPost(){
 		toPost(root);
 		System.out.print("\n");
 	}
+	
+	
+	
 	private static void toPost(Node root){
 		if(root == null)
 			return;
@@ -76,6 +142,33 @@ public class BST <T extends Comparable<T>>{
 		toPost(root.right);
 		System.out.print(root.data+" ");
 	}
+	public void toPost2(){
+		toPost2(root);
+		System.out.println();
+	}
+	private static void toPost2(Node root){
+		Node current = root;
+		if(root == null)
+			return;
+		Stack s = new Stack();
+		Stack s2 = new Stack();
+		s.push(current);
+		while(!s.empty()){
+			s2.push(s.peek());
+			current = (Node)s.pop();
+			if(current.left !=null)
+				s.push(current.left);
+			if(current.right!=null)
+				s.push(current.right);
+			
+		}
+		while(!s2.empty()){
+			current = (Node)s2.pop();
+			System.out.print(current.data + " ");
+			
+		}
+	}
+	
 	public void delete(Comparable n){
 		this.root = delete(root,n);
 	}
