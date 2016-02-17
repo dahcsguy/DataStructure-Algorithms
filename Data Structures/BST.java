@@ -5,16 +5,7 @@ public class BST <T extends Comparable<T>>{
 		this.root = null;	
 	}
 	public static void main(String []args){
-		BST b = new BST();
-		b.massInsert(new Integer[]{1,3,34,45,2,3,5,2,2,545,4});
-		b.toPre();
-		b.toPre2();
-		System.out.println();
-		b.toPost2();
-		b.toPost();
-		System.out.println();
-		b.toIn();
-		b.toIn2();
+		
 	}
 	
 	public boolean find(Comparable n){
