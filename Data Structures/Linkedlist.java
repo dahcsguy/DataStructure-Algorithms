@@ -72,6 +72,17 @@ public class Linkedlist{
 		reversePrint(n.next);
 		System.out.print(n.data+" ");
 	}
+	public static void nthToLast(int k){
+		nthToLast(head, k);
+	}
+	private static int nthToLast(Node head, int n){
+		if(head == null)
+			return -1;
+		int i = nthToLast(head.next,n) + 1;
+		if(i == n)
+			System.out.println(head.data);
+		return i;
+	}
 	public int elementAt(int num){
 		Node temp = head;
 		int counter = 0;
@@ -96,7 +107,13 @@ public class Linkedlist{
 	}
 	
 	public static void main(String []args){
-
+		Linkedlist ll = new Linkedlist();
+		ll.add(100);
+		ll.add(2);
+		ll.add(5);
+		ll.print();
+		ll.nthToLast(5);
+		
 	}
 	private static class Node{
 		int data;
